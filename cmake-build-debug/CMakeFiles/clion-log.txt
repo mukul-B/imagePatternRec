@@ -1,0 +1,4 @@
+D:\CLion\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" C:\Users\dell\CLionProjects\rgb
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/dell/CLionProjects/rgb/cmake-build-debug

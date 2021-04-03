@@ -1,0 +1,3 @@
+D:\CLion\bin\cmake\win\bin\cmake.exe -E rm -f CMakeFiles\rgb.dir/objects.a
+D:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\ar.exe cr CMakeFiles\rgb.dir/objects.a @CMakeFiles\rgb.dir\objects1.rsp
+D:\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe -g   -Wl,--whole-archive CMakeFiles\rgb.dir/objects.a -Wl,--no-whole-archive  -o rgb.exe -Wl,--out-implib,librgb.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\rgb.dir\linklibs.rsp

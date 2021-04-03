@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/dell/CLionProjects/rgb/Threshold.cpp
+iostream
+-
+fstream
+-
+stdlib.h
+-
+stdio.h
+-
+image.h
+C:/Users/dell/CLionProjects/rgb/image.h
+
+C:/Users/dell/CLionProjects/rgb/image.h
+rgb.h
+C:/Users/dell/CLionProjects/rgb/rgb.h
+
+C:/Users/dell/CLionProjects/rgb/rgb.h
+
