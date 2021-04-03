@@ -9,6 +9,8 @@ CMakeFiles/rgb.dir/ReadImageHeader.cpp.obj: ../ReadImageHeader.cpp
 CMakeFiles/rgb.dir/ReadImageHeader.cpp.obj: ../image.h
 CMakeFiles/rgb.dir/ReadImageHeader.cpp.obj: ../rgb.h
 
+CMakeFiles/rgb.dir/Threshold.cpp.obj: ../DiscriminantCases.h
+CMakeFiles/rgb.dir/Threshold.cpp.obj: ../MatricOP.h
 CMakeFiles/rgb.dir/Threshold.cpp.obj: ../Threshold.cpp
 CMakeFiles/rgb.dir/Threshold.cpp.obj: ../image.h
 CMakeFiles/rgb.dir/Threshold.cpp.obj: ../rgb.h

@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/dell/CLionProjects/rgb/DiscriminantCases.h">
+			<Option target="rgb"/>
+		</Unit>
+		<Unit filename="C:/Users/dell/CLionProjects/rgb/MatricOP.h">
+			<Option target="rgb"/>
+		</Unit>
 		<Unit filename="C:/Users/dell/CLionProjects/rgb/ReadImage.cpp">
 			<Option target="rgb"/>
 		</Unit>
