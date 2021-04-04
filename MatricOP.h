@@ -3,8 +3,8 @@
 
 #endif //PATERNREC_MATRICOP_H
 
-#define rows 5
-#define cols 5
+#define rows 2
+#define cols 2
 
 #include "bits/stdc++.h"
 

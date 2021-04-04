@@ -155,14 +155,28 @@ public:
               - (log(cov1.deter()) * (0.5))
               + log(prior1);
 
-
     }
 
     double getDecision(Matrix x) {
 
-        //double decision1 = ((x.trans()) * (W1 * x) + (w1.trans()) * x).getDouble() + w01;
-        double decision1 = ((w1.trans()) * x ).getDouble() + w01;
-        return decision1 ;
-        //return x.getDouble();
+        try {
+        double decision1 = ((x.trans()) * (W1 * x) + (w1.trans()) * x).getDouble() + w01;
+        /*Matrix ch = W1 * x;
+        ch.display();
+        cout<< "here";
+        double decision1 = (ch).getDouble();*/
+       // x.display();
+        //   double decision1 = ((x.trans()) * (W1 * x) + (w1.trans()) * x).getDouble() + w01;
+            return decision1 ;
+
+        }
+      // double decision1 = ((w1.trans()) * x ).getDouble() + w01;
+
+    catch (exception& e)
+    {
+        cout << e.what() << '\n';
+        return 0;
+    }
+
     }
 };
