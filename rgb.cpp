@@ -25,3 +25,10 @@ bool RGB::operator==(RGB rgb) {
     else
         return false;
 }
+
+bool RGB::operator!=(RGB rgb) {
+    if(!(this->r==rgb.r && this->g==rgb.g && this->b==rgb.b))
+        return true;
+    else
+        return false;
+}

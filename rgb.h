@@ -8,6 +8,7 @@ struct RGB {
     RGB();
     RGB& operator=(RGB);
     bool operator==(RGB);
+    bool operator!=(RGB);
     int r, g, b;
 } ;
 

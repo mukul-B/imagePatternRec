@@ -27,6 +27,7 @@ class Matrix {
 public:
     Matrix() {}
 
+
     Matrix(double **ar, pair<int, int> dimen) {
         this->dimen = dimen;
         for (int i = 0; i < dimen.first; i++) {

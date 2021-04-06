@@ -161,12 +161,8 @@ public:
 
         try {
         double decision1 = ((x.trans()) * (W1 * x) + (w1.trans()) * x).getDouble() + w01;
-        /*Matrix ch = W1 * x;
-        ch.display();
-        cout<< "here";
-        double decision1 = (ch).getDouble();*/
-       // x.display();
-        //   double decision1 = ((x.trans()) * (W1 * x) + (w1.trans()) * x).getDouble() + w01;
+
+         // double decision1 = ((x.trans()) * (x) + (w1.trans()) * x).getDouble() + w01;
             return decision1 ;
 
         }
