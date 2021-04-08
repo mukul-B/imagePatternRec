@@ -140,7 +140,9 @@ public:
 
 class ThresholdCase3{
 
-    Matrix W1, w1;
+    Matrix W1;
+    //w1;
+    Matrix mu;
     double w01;
 
 public:
@@ -150,17 +152,19 @@ public:
            {
 
         W1 = (cov1.inv()) * (-0.5);
-        w1 = (cov1.inv()) * m1;
-        w01 = ((m1.trans() * (cov1.inv() * m1)) * (-0.5)).getDouble()
-              - (log(cov1.deter()) * (0.5))
-              + log(prior1);
+        //w1 = (cov1.inv()) * m1;
+        mu=m1;
+               w01=1/(pow(cov1.deter(),0.5) * atan(1)*4 *2);
+
+
 
     }
 
     double getDecision(Matrix x) {
 
         try {
-        double decision1 = ((x.trans()) * (W1 * x) + (w1.trans()) * x).getDouble() + w01;
+       // double decision1 = ((x.trans()) * (W1 * x) + (w1.trans()) * x).getDouble() + w01;
+            double decision1 = w01 * exp((((x-mu).trans()) * (W1 * (x-mu))).getDouble() );
 
          // double decision1 = ((x.trans()) * (x) + (w1.trans()) * x).getDouble() + w01;
             return decision1 ;

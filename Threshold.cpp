@@ -76,8 +76,10 @@ vector<Matrix> get_normailizeScala(ImageType image) {
 }
 
 void roc(vector<Matrix> sam, vector<int> ref_image, int N, int M, ThresholdCase3 classifier) {
+    /*fstream fout;
+    fout.open("roc.csv", ios::out);*/
     int FP = 0, FN = 0;
-    for (int t = 2; t < 8; t++) {
+    for (int t = 60; t < 181; t= t+ 10) {
         FP = 0;
         FN = 0;
         for (int i = 0; i < N; i++) {
@@ -97,8 +99,9 @@ void roc(vector<Matrix> sam, vector<int> ref_image, int N, int M, ThresholdCase3
 ThresholdCase3 get_classifier(){
      vector<vector<double> > mu1 = {{0.432224},
                                     {0.295771}};
-     vector<vector<double> > cov1 = {{0.000118434,0},
-                                     {0,0.0000674167}};
+     vector<vector<double> > cov1 = {{0.00243324,-0.00111725},
+                                     {-0.00111725,0.000788441}};
+     //-0.00111725
      /*vector<vector<double> > mu1 = {{1},
                                     {1}};
      vector<vector<double> > cov1  = {{1, 0},
@@ -112,6 +115,8 @@ ThresholdCase3 get_classifier(){
      Matrix cv1;
      cv1.input(cov1, covdimen);
      ThresholdCase3 classifier = ThresholdCase3(m1, cv1, 0.5);
+   // cout << classifier.getDecision(m1)<< endl;
+    //5.88885
      return classifier;
 
 }
@@ -139,22 +144,17 @@ int main(int argc, char *argv[]) {
     int noOfFfeatures = 2;
     pair<int, int> mudimen = {noOfFfeatures, 1};*/
 
-    int FP = 0, FN = 0;
+   //77290,77235,55
+
+  int FP = 0, FN = 0;
 
     for (int i = 0; i < N; i++)
         for (int j = 0; j < M; j++) {
-
-
             image.getPixelVal(i, j, val);
             double nr = (double) val.r / (val.r + val.g + val.b);
             double ng = (double) val.g / (val.r + val.g + val.b);
-            /*vector<vector<double> > sampler
-                    = {{nr},
-                       {ng}};
-            //Matrix sample;
-            sample.input(sampler, mudimen);*/
-
-            if (classifier.getDecision(sam[i * M + j]) > 3.615) {
+            //5.99030625
+            if (classifier.getDecision(sam[i * M + j]) > 127.15) {
                 image.setPixelVal(i, j, val);
                 if (ref_image[i * M + j] == black_ind)
                     FP++;
@@ -168,6 +168,7 @@ int main(int argc, char *argv[]) {
     cout << FP << "," << FN <<","<<FP-FN<< "\n";
     // write image
     writeImage(argv[3], image);
+
 
     return 0;
 }
@@ -223,13 +224,13 @@ void derive_distribution(char sample_file[], ImageType &image) {
             }
         }
 
-    cout << skin_nr_sigmaSq << "," << skin_ng_sigmaSq << "\n";
-    skin_nr_sigmaSq = pow(skin_nr_sigmaSq, 0.5) / skin_sample_size;
-    skin_ng_sigmaSq = pow(skin_ng_sigmaSq, 0.5) / skin_sample_size;
-    skin_co_sigmaSq = pow(skin_co_sigmaSq, 0.5) / skin_sample_size;
 
-    cout << skin_nr_mu << "," << skin_ng_mu << "\n";
-    cout << skin_nr_sigmaSq << "," << skin_ng_sigmaSq << "\n";
-    cout << skin_co_sigmaSq << "\n";
+    skin_nr_sigmaSq = skin_nr_sigmaSq / skin_sample_size;
+    skin_ng_sigmaSq = skin_ng_sigmaSq / skin_sample_size;
+    skin_co_sigmaSq = skin_co_sigmaSq / skin_sample_size;
+
+    cout << "mu nr: "<<skin_nr_mu << "," << "mu nr: " << skin_ng_mu << "\n";
+    cout << "sigma square nr: "<< skin_nr_sigmaSq << "," << "sigma square nr: "<< skin_ng_sigmaSq << "\n";
+    cout << "sigma square covariance: "<< skin_co_sigmaSq << "\n";
     cout << skin_sample_size<<"\n";
 }

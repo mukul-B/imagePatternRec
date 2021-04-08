@@ -27,12 +27,24 @@ class Matrix {
 public:
     Matrix() {}
 
+    /*~Matrix() {
+        delete arr;
+    }*/
+
 
     Matrix(double **ar, pair<int, int> dimen) {
         this->dimen = dimen;
         for (int i = 0; i < dimen.first; i++) {
             for (int j = 0; j < dimen.second; j++) {
                 arr[i][j] = ar[i][j];
+            }
+        }
+    }
+    Matrix(vector<vector<double> > &A, pair<int, int> dimen) {
+        this->dimen = dimen;
+        for (int i = 0; i < dimen.first; i++) {
+            for (int j = 0; j < dimen.second; j++) {
+                arr[i][j] = A[i][j];
             }
         }
     }
@@ -146,20 +158,28 @@ void Matrix::display() {
 }
 
 Matrix Matrix::operator+(Matrix x) {
-    double **mat = new double *[x.dimen.second];
+   // double **mat = new double *[x.dimen.second];
+    vector<vector<double> > mat;
+    mat.resize(x.dimen.first);
     for (int i = 0; i < dimen.first; i++) {
-        mat[i] = new double[dimen.first];
+        mat[i].resize(x.dimen.second);
+       // mat[i] = new double[dimen.first];
         for (int j = 0; j < x.dimen.second; j++) {
             mat[i][j] = arr[i][j]+ x.arr[i][j];
         }
     }
+//    delete [] mat;
     return Matrix(mat, {dimen.first, x.dimen.second});
 }
 
 Matrix Matrix::operator-(Matrix x) {
-    double **mat = new double *[x.dimen.second];
+    /*double **mat = new double *[x.dimen.second];
     for (int i = 0; i < dimen.first; i++) {
-        mat[i] = new double[dimen.first];
+        mat[i] = new double[dimen.first];*/
+    vector<vector<double> > mat;
+    mat.resize(x.dimen.first);
+    for (int i = 0; i < dimen.first; i++) {
+        mat[i].resize(x.dimen.second);
         for (int j = 0; j < x.dimen.second; j++) {
             mat[i][j] = arr[i][j]  - x.arr[i][j];
         }
@@ -169,9 +189,13 @@ Matrix Matrix::operator-(Matrix x) {
 
 Matrix Matrix::operator*(Matrix x) {
 
-    double **mat = new double *[x.dimen.second];
+    /*double **mat = new double *[x.dimen.second];
     for (int i = 0; i < dimen.first; i++) {
-        mat[i] = new double[dimen.first];
+        mat[i] = new double[dimen.first];*/
+    vector<vector<double> > mat;
+    mat.resize(dimen.first);
+    for (int i = 0; i < dimen.first; i++) {
+        mat[i].resize(x.dimen.second);
         for (int j = 0; j < x.dimen.second; j++) {
             mat[i][j] = 0;
             for (int k = 0; k < x.dimen.first; k++) {
@@ -184,9 +208,14 @@ Matrix Matrix::operator*(Matrix x) {
 }
 
 Matrix Matrix::operator*(double x) {
-    double **mat = new double *[dimen.second];
+    /*double **mat = new double *[dimen.second];
+
     for (int i = 0; i < dimen.first; i++) {
-        mat[i] = new double[dimen.first];
+        mat[i] = new double[dimen.first];*/
+    vector<vector<double> > mat;
+    mat.resize(dimen.first);
+    for (int i = 0; i < dimen.first; i++) {
+        mat[i].resize(dimen.second);
         for (int j = 0; j < dimen.second; j++) {
             mat[i][j] = x * arr[i][j];
         }
@@ -219,10 +248,22 @@ bool Matrix::operator==(Matrix x) {
     return check;
 }
 
-Matrix Matrix::trans() {
+/*Matrix Matrix::trans() {
     double **b = new double *[dimen.second];
     for (int i = 0; i < dimen.second; i++) {
         b[i] = new double[dimen.first];
+        for (int j = 0; j < dimen.first; j++) {
+            b[i][j] = arr[j][i];
+        }
+    }
+    return Matrix(b, {dimen.second, dimen.first});
+}*/
+Matrix Matrix::trans() {
+    vector<vector<double> > b;
+    b.resize(dimen.second);
+    for (int i = 0; i < dimen.second; i++) {
+       // b[i] = new double[dimen.first];
+        b[i].resize(dimen.first);
         for (int j = 0; j < dimen.first; j++) {
             b[i][j] = arr[j][i];
         }
