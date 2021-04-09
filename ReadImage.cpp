@@ -68,3 +68,5 @@ void readImage(char fname[], ImageType& image)
     delete [] charImage;
 
 }
+
+

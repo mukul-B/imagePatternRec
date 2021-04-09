@@ -56,7 +56,7 @@ class EuclideanClass
         : public ClassifierClass {
 public:
     EuclideanClass(Matrix m1, Matrix m2, Matrix cov1, Matrix cov2, double prior1, double prior2)
-            : ClassifierClass(m1, m2,cov1, cov2,prior1, prior2) {}
+            : ClassifierClass(m1, m2, cov1, cov2, prior1, prior2) {}
 
     double getDecision(Matrix x) {
         return getEucldianDistance(x);
@@ -72,6 +72,7 @@ class Case1
     Matrix x0, wt;
 public:
     Case1() {}
+
     Case1(Matrix m1, Matrix m2, Matrix cov1, Matrix cov2, double prior1, double prior2)
             : ClassifierClass(m1, m2, cov1, cov2, prior1, prior2) {
         double sigma = 0;
@@ -90,6 +91,7 @@ public:
         double probilityRatio = log(prior1 / prior2);
         x0 = x0 - ((m1 - m2) * (cof * probilityRatio));
     }
+
     double getDecision(Matrix x) {
 
         Matrix decision = (wt * (x - x0));
@@ -111,7 +113,7 @@ class Case3
 public:
     Case3() {}
 
-    Case3(Matrix m1, Matrix m2,Matrix cov1, Matrix cov2,double prior1, double prior2)
+    Case3(Matrix m1, Matrix m2, Matrix cov1, Matrix cov2, double prior1, double prior2)
             : ClassifierClass(m1, m2, cov1, cov2, prior1, prior2) {
 
         W1 = (cov1.inv()) * (-0.5);
@@ -138,45 +140,23 @@ public:
 
 // treshold based classifier
 
-class ThresholdCase3{
+class ThresholdBased {
 
     Matrix W1;
-    //w1;
     Matrix mu;
     double w01;
 
 public:
-    ThresholdCase3() {}
+    ThresholdBased() {}
 
-    ThresholdCase3(Matrix m1,Matrix cov1,double prior1)
-           {
-
+    ThresholdBased(Matrix m1, Matrix cov1, double prior1) {
         W1 = (cov1.inv()) * (-0.5);
-        //w1 = (cov1.inv()) * m1;
-        mu=m1;
-               w01=1/(pow(cov1.deter(),0.5) * atan(1)*4 *2);
-
-
-
+        mu = m1;
+        w01 = 1 / (pow(cov1.deter(), 0.5) * atan(1) * 4 * 2);
     }
 
     double getDecision(Matrix x) {
-
-        try {
-       // double decision1 = ((x.trans()) * (W1 * x) + (w1.trans()) * x).getDouble() + w01;
-            double decision1 = w01 * exp((((x-mu).trans()) * (W1 * (x-mu))).getDouble() );
-
-         // double decision1 = ((x.trans()) * (x) + (w1.trans()) * x).getDouble() + w01;
-            return decision1 ;
-
-        }
-      // double decision1 = ((w1.trans()) * x ).getDouble() + w01;
-
-    catch (exception& e)
-    {
-        cout << e.what() << '\n';
-        return 0;
-    }
-
+        double decision1 = w01 * exp((((x - mu).trans()) * (W1 * (x - mu))).getDouble());
+        return decision1;
     }
 };
